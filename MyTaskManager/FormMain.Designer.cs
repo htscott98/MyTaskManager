@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DataGridViewProjects = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.TextBoxSearch = new System.Windows.Forms.TextBox();
@@ -42,6 +43,14 @@
             // DataGridViewProjects
             // 
             this.DataGridViewProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.DataGridViewProjects.DefaultCellStyle = dataGridViewCellStyle1;
             this.DataGridViewProjects.Location = new System.Drawing.Point(12, 60);
             this.DataGridViewProjects.Name = "DataGridViewProjects";
             this.DataGridViewProjects.RowTemplate.Height = 25;
