@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +32,7 @@ namespace MyTaskManager
             if (newTask == true)
             {
                 ButtonNewActivity.Enabled = false;
+                ButtonNewAttachment.Enabled = false;
             }
             else
             {
@@ -39,6 +43,7 @@ namespace MyTaskManager
 
                 PopulateTaskInfo();
                 PopulateActivity();
+                PopulateAttachments();
 
             }
 
@@ -165,6 +170,7 @@ namespace MyTaskManager
                         selectedTask = task;
                         PopulateTaskInfo();
                         ButtonNewActivity.Enabled = true;
+                        ButtonNewAttachment.Enabled = true;
                     }
                     else
                     {
@@ -210,6 +216,45 @@ namespace MyTaskManager
             }
         }
 
+        private void PopulateAttachments()
+        {
+            try
+            {
+                DataGridViewAttachments.DataSource = null;
+                DataTable dt = Attachments.GetDataTableByTaskID(selectedTask.ID.ToString());
+
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    DataGridViewAttachments.DataSource = dt;
+                    SetDisplayProperties();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                GlobalCode.ExceptionMessageBox();
+            }
+        }
+
+        private void SetDisplayProperties()
+        {
+            this.DataGridViewAttachments.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
+            this.DataGridViewAttachments.AllowUserToAddRows = false;
+            this.DataGridViewAttachments.AllowUserToDeleteRows = false;
+            this.DataGridViewAttachments.AllowUserToResizeRows = false;
+            this.DataGridViewAttachments.AllowUserToOrderColumns = true;
+            this.DataGridViewAttachments.MultiSelect = true;
+            this.DataGridViewAttachments.ReadOnly = true;
+            this.DataGridViewAttachments.RowHeadersVisible = false;
+            this.DataGridViewAttachments.AllowUserToResizeColumns = true;
+            this.DataGridViewAttachments.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewAttachments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridViewAttachments.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            this.DataGridViewAttachments.Columns["ID"].Visible = false;
+            this.DataGridViewAttachments.Columns["TaskID"].Visible = false;
+            this.DataGridViewAttachments.Columns["Attachment"].Visible = false;
+        }
+
         private void ButtonNewActivity_Click(object sender, EventArgs e)
         {
             FormNewActivity f = new FormNewActivity();
@@ -217,6 +262,103 @@ namespace MyTaskManager
             f.ShowDialog();
             PopulateTaskInfo();
             PopulateActivity();
+        }
+
+        private void ButtonNewAttachment_Click(object sender, EventArgs e)
+        {
+            FormNewAttachment f = new FormNewAttachment();
+            f.selectedTask = selectedTask;
+            f.ShowDialog();
+            PopulateAttachments();
+        }
+
+        private void DataGridViewAttachments_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                if (DataGridViewAttachments.SelectedRows.Count == 0)
+                {
+                    return;
+                }
+
+                string id = DataGridViewAttachments.SelectedRows[0].Cells["ID"].Value.ToString();
+
+                if (string.IsNullOrEmpty(id) == true)
+                {
+                    return;
+                }
+
+                Attachments o = Attachments.GetObjectByID(id);
+
+                if (o == null || o.ID == 0)
+                {
+                    return;
+                }
+
+                byte[] buffer = (byte[])o.Attachment;
+
+                string filePath = @"C:\MyTaskManager\OpenedImages\";
+                string fileName = o.Name;
+
+                Directory.CreateDirectory(filePath);
+                File.WriteAllBytes(filePath + fileName, buffer);
+
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(filePath + fileName) { UseShellExecute = true });
+
+
+
+            }
+            catch (Exception ex)
+            {
+                GlobalCode.ExceptionMessageBox();
+            }
+        }
+
+        private void DataGridViewAttachments_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            try
+            {
+
+                if (DataGridViewAttachments.SelectedRows.Count == 0)
+                {
+                    return;
+                }
+
+                if (e.Button != MouseButtons.Right)
+                {
+                    return;
+                }
+
+                string id = DataGridViewAttachments.SelectedRows[0].Cells["ID"].Value.ToString();
+
+                if (string.IsNullOrEmpty(id) == true)
+                {
+                    return;
+                }
+
+                Attachments o = Attachments.GetObjectByID(id);
+
+                if (GlobalCode.ShowMSGBox("Would you like to delete the file " + o.Name + "?", MessageBoxIcon.Question, MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+
+                if (o.DeleteRecord() == true)
+                {
+                    PopulateAttachments();
+                }
+                else
+                {
+                    GlobalCode.ShowMSGBox("Unable to delete file. Try again or contact the developer.", MessageBoxIcon.Error);
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                GlobalCode.ExceptionMessageBox();
+            }
         }
     }
 }

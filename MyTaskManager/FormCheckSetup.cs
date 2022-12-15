@@ -59,6 +59,7 @@ namespace MyTaskManager
                 bool projectsLocated = false;
                 bool statusesLocated = false;
                 bool activityLocated = false;
+                bool attachmentsLocated = false;
                 foreach (DataRow row in dt.Rows)
                 {
                     if (row["name"].ToString() == "Tasks")
@@ -76,9 +77,14 @@ namespace MyTaskManager
                         activityLocated = true;
                     }
 
+                    if (row["name"].ToString() == "Attachments")
+                    {
+                        attachmentsLocated = true;
+                    }
+
                 }
 
-                if (projectsLocated == true && statusesLocated == true && activityLocated == true)
+                if (projectsLocated == true && statusesLocated == true && activityLocated == true && attachmentsLocated == true)
                 {
                     CheckBoxSQLTables.Checked = true;
                 }
@@ -154,18 +160,15 @@ namespace MyTaskManager
                     string username = Environment.UserName;
 
                     string sql = "";
-                    sql += "CREATE TABLE Tasks (ID int IDENTITY(1,1) PRIMARY KEY, TaskName varchar(200) NOT NULL, StatusID int, LastUpdated datetime NOT NULL, DisplayOrder int NOT NULL, Enabled bit NOT NULL);"; //Projects
-                    sql += "CREATE TABLE Statuses (ID int IDENTITY(1,1) PRIMARY KEY, StatusName varchar(200) NOT NULL, DisplayOrder int NOT NULL);"; //Statuses
-                    sql += "CREATE TABLE Activity (ID int IDENTITY(1,1) PRIMARY KEY, ActivityName varchar(5000), TaskID int, ActivityTimestamp datetime NOT NULL);";
-
-                    DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
 
                     sql = "SELECT * FROM Sys.Tables ORDER BY Name ASC";
-                    dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
+                    DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
 
                     bool projectsLocated = false;
                     bool statusesLocated = false;
                     bool activityLocated = false;
+                    bool attachmentsLocated = false;
+
                     foreach (DataRow row in dt.Rows)
                     {
                         if (row["name"].ToString() == "Tasks")
@@ -183,13 +186,41 @@ namespace MyTaskManager
                             activityLocated = true;
                         }
 
+                        if (row["name"].ToString() == "Attachments")
+                        {
+                            attachmentsLocated = true;
+                        }
+
                     }
 
-                    if (projectsLocated == false || statusesLocated == false || activityLocated == false)
+                    sql = "";
+
+                    if (attachmentsLocated == false)
                     {
-                        GlobalCode.ShowMSGBox("Unable to create tables. Try again or contact the developer.", MessageBoxIcon.Error);
-                        return;
+                        sql = "CREATE PROCEDURE [dbo].[InsertFile] (@TaskID int, @Name varchar(200), @Attachment VarBinary(MAX), @UploadedTimestamp datetime) AS BEGIN INSERT INTO Attachments (TaskID, Name, Attachment, UploadedTimestamp) VALUES (@TaskID, @Name, @Attachment, @UploadedTimestamp) END";
+                        Execute.ExecuteStatementReturnBool(Connection.InitMyTaskManagerConnection(), sql);
+                        sql = "ALTER PROCEDURE [dbo].[InsertFile] (@TaskID int, @Name varchar(200),  @Attachment VarBinary(MAX), @UploadedTimestamp datetime) AS BEGIN INSERT INTO Attachments (TaskID, Name, Attachment, UploadedTimestamp) VALUES (@TaskID, @Name, @Attachment, @UploadedTimestamp) END";
+                        Execute.ExecuteStatementReturnBool(Connection.InitMyTaskManagerConnection(), sql);
+                        sql = "CREATE TABLE Attachments (ID int IDENTITY(1,1) PRIMARY KEY, TaskID int NOT NULL, Name varchar(200), Attachment VarBinary(MAX) NOT NULL, UploadedTimestamp datetime NOT NULL);";
                     }
+
+                    if (projectsLocated == false)
+                    {
+                        sql += "CREATE TABLE Tasks (ID int IDENTITY(1,1) PRIMARY KEY, TaskName varchar(200) NOT NULL, StatusID int, LastUpdated datetime NOT NULL, DisplayOrder int NOT NULL, Enabled bit NOT NULL);"; //Projects
+                    }
+
+                    if (statusesLocated == false)
+                    {
+                        sql += "CREATE TABLE Statuses (ID int IDENTITY(1,1) PRIMARY KEY, StatusName varchar(200) NOT NULL, DisplayOrder int NOT NULL);"; //Statuses
+                    }
+
+                    if (activityLocated == false)
+                    {
+                        sql += "CREATE TABLE Activity (ID int IDENTITY(1,1) PRIMARY KEY, ActivityName varchar(5000), TaskID int, ActivityTimestamp datetime NOT NULL);";
+                    }
+                    
+
+                    dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
 
 
 

@@ -41,21 +41,24 @@
             this.label4 = new System.Windows.Forms.Label();
             this.TextBoxLastUpdated = new System.Windows.Forms.TextBox();
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
+            this.DataGridViewAttachments = new System.Windows.Forms.DataGridView();
+            this.ButtonNewAttachment = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewAttachments)).BeginInit();
             this.SuspendLayout();
             // 
             // RichTextBoxActivity
             // 
-            this.RichTextBoxActivity.Location = new System.Drawing.Point(323, 12);
+            this.RichTextBoxActivity.Location = new System.Drawing.Point(652, 12);
             this.RichTextBoxActivity.Name = "RichTextBoxActivity";
             this.RichTextBoxActivity.ReadOnly = true;
-            this.RichTextBoxActivity.Size = new System.Drawing.Size(449, 399);
+            this.RichTextBoxActivity.Size = new System.Drawing.Size(320, 399);
             this.RichTextBoxActivity.TabIndex = 0;
             this.RichTextBoxActivity.TabStop = false;
             this.RichTextBoxActivity.Text = "";
             // 
             // ButtonNewActivity
             // 
-            this.ButtonNewActivity.Location = new System.Drawing.Point(627, 417);
+            this.ButtonNewActivity.Location = new System.Drawing.Point(827, 417);
             this.ButtonNewActivity.Name = "ButtonNewActivity";
             this.ButtonNewActivity.Size = new System.Drawing.Size(145, 32);
             this.ButtonNewActivity.TabIndex = 6;
@@ -161,11 +164,34 @@
             this.CheckBoxEnabled.Text = "Enabled";
             this.CheckBoxEnabled.UseVisualStyleBackColor = true;
             // 
+            // DataGridViewAttachments
+            // 
+            this.DataGridViewAttachments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewAttachments.Location = new System.Drawing.Point(323, 12);
+            this.DataGridViewAttachments.Name = "DataGridViewAttachments";
+            this.DataGridViewAttachments.RowTemplate.Height = 25;
+            this.DataGridViewAttachments.Size = new System.Drawing.Size(320, 399);
+            this.DataGridViewAttachments.TabIndex = 12;
+            this.DataGridViewAttachments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewAttachments_CellDoubleClick);
+            this.DataGridViewAttachments.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewAttachments_CellMouseClick);
+            // 
+            // ButtonNewAttachment
+            // 
+            this.ButtonNewAttachment.Location = new System.Drawing.Point(498, 417);
+            this.ButtonNewAttachment.Name = "ButtonNewAttachment";
+            this.ButtonNewAttachment.Size = new System.Drawing.Size(145, 32);
+            this.ButtonNewAttachment.TabIndex = 13;
+            this.ButtonNewAttachment.Text = "New Attachment";
+            this.ButtonNewAttachment.UseVisualStyleBackColor = true;
+            this.ButtonNewAttachment.Click += new System.EventHandler(this.ButtonNewAttachment_Click);
+            // 
             // FormTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.ButtonNewAttachment);
+            this.Controls.Add(this.DataGridViewAttachments);
             this.Controls.Add(this.CheckBoxEnabled);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TextBoxLastUpdated);
@@ -181,12 +207,13 @@
             this.Controls.Add(this.RichTextBoxActivity);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(800, 500);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.MaximumSize = new System.Drawing.Size(1000, 500);
+            this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "FormTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormShowProject";
             this.Load += new System.EventHandler(this.FormProject_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewAttachments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,5 +234,7 @@
         private Label label4;
         private TextBox TextBoxLastUpdated;
         private CheckBox CheckBoxEnabled;
+        private DataGridView DataGridViewAttachments;
+        private Button ButtonNewAttachment;
     }
 }
