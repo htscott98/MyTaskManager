@@ -42,6 +42,9 @@
             // 
             // DataGridViewProjects
             // 
+            this.DataGridViewProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGridViewProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
@@ -77,6 +80,7 @@
             // 
             // LabelRowCount
             // 
+            this.LabelRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LabelRowCount.AutoSize = true;
             this.LabelRowCount.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.LabelRowCount.Location = new System.Drawing.Point(12, 417);
@@ -87,6 +91,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.label2.Location = new System.Drawing.Point(617, 37);
@@ -97,6 +102,7 @@
             // 
             // ButtonNewProject
             // 
+            this.ButtonNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNewProject.Location = new System.Drawing.Point(643, 417);
             this.ButtonNewProject.Name = "ButtonNewProject";
             this.ButtonNewProject.Size = new System.Drawing.Size(129, 32);
@@ -107,6 +113,7 @@
             // 
             // ButtonManageStatuses
             // 
+            this.ButtonManageStatuses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonManageStatuses.Location = new System.Drawing.Point(508, 417);
             this.ButtonManageStatuses.Name = "ButtonManageStatuses";
             this.ButtonManageStatuses.Size = new System.Drawing.Size(129, 32);
