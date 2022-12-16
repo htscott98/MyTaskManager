@@ -39,8 +39,6 @@
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.ComboBoxStatus = new System.Windows.Forms.ComboBox();
-            this.TextBoxDisplayOrder = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.TextBoxLastUpdated = new System.Windows.Forms.TextBox();
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
@@ -102,7 +100,7 @@
             this.TextBoxTask.Location = new System.Drawing.Point(12, 32);
             this.TextBoxTask.Multiline = true;
             this.TextBoxTask.Name = "TextBoxTask";
-            this.TextBoxTask.Size = new System.Drawing.Size(305, 235);
+            this.TextBoxTask.Size = new System.Drawing.Size(305, 283);
             this.TextBoxTask.TabIndex = 1;
             // 
             // ButtonSave
@@ -128,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 270);
+            this.label2.Location = new System.Drawing.Point(12, 318);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 17);
             this.label2.TabIndex = 6;
@@ -137,26 +135,10 @@
             // ComboBoxStatus
             // 
             this.ComboBoxStatus.FormattingEnabled = true;
-            this.ComboBoxStatus.Location = new System.Drawing.Point(12, 290);
+            this.ComboBoxStatus.Location = new System.Drawing.Point(12, 338);
             this.ComboBoxStatus.Name = "ComboBoxStatus";
             this.ComboBoxStatus.Size = new System.Drawing.Size(305, 25);
             this.ComboBoxStatus.TabIndex = 2;
-            // 
-            // TextBoxDisplayOrder
-            // 
-            this.TextBoxDisplayOrder.Location = new System.Drawing.Point(12, 338);
-            this.TextBoxDisplayOrder.Name = "TextBoxDisplayOrder";
-            this.TextBoxDisplayOrder.Size = new System.Drawing.Size(305, 25);
-            this.TextBoxDisplayOrder.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 318);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 17);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Display Order";
             // 
             // label4
             // 
@@ -203,7 +185,7 @@
             this.ButtonNewAttachment.Name = "ButtonNewAttachment";
             this.ButtonNewAttachment.Size = new System.Drawing.Size(145, 32);
             this.ButtonNewAttachment.TabIndex = 13;
-            this.ButtonNewAttachment.Text = "New Attachment";
+            this.ButtonNewAttachment.Text = "New File";
             this.ButtonNewAttachment.UseVisualStyleBackColor = true;
             this.ButtonNewAttachment.Click += new System.EventHandler(this.ButtonNewAttachment_Click);
             // 
@@ -212,9 +194,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(652, 12);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 17);
+            this.label5.Size = new System.Drawing.Size(33, 17);
             this.label5.TabIndex = 14;
-            this.label5.Text = "Attachments";
+            this.label5.Text = "Files";
             // 
             // label6
             // 
@@ -237,8 +219,6 @@
             this.Controls.Add(this.CheckBoxEnabled);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.TextBoxLastUpdated);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.TextBoxDisplayOrder);
             this.Controls.Add(this.ComboBoxStatus);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ButtonCancel);
@@ -272,8 +252,6 @@
         private Button ButtonCancel;
         private Label label2;
         private ComboBox ComboBoxStatus;
-        private TextBox TextBoxDisplayOrder;
-        private Label label3;
         private Label label4;
         private TextBox TextBoxLastUpdated;
         private CheckBox CheckBoxEnabled;

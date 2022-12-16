@@ -171,6 +171,38 @@ namespace MyTaskManager
             return objList;
         }
 
+        public static List<Task> GetListOfDisabledObjects()
+        {
+            List<Task> objList = new List<Task>();
+            string strSQL = "";
+            try
+            {
+                strSQL = GetSQLSelect() +
+                "FROM Tasks " +
+                "WHERE Enabled = 0" +
+                "ORDER BY DisplayOrder ASC";
+
+                DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), strSQL);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        Task obj = new Task(r);
+
+                        if (obj != null)
+                            objList.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return objList;
+        }
+
         public static Task GetObjectByID(string id)
         {
             Task obj = new Task();

@@ -53,8 +53,13 @@ namespace MyTaskManager
                     conn.Open();
                     if (command.ExecuteNonQuery() > 0)
                     {
-                        GlobalCode.ShowMSGBox("Data has been saved successfully.");
-                        this.Close();
+                        selectedTask.LastUpdated = DateTime.Now;
+
+                        if (selectedTask.UpdateRecord() == true)
+                        {
+                            GlobalCode.ShowMSGBox("Data has been saved successfully.");
+                            this.Close();
+                        }
                     }
                     else
                     {

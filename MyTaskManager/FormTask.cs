@@ -75,7 +75,6 @@ namespace MyTaskManager
                     ComboBoxStatus.Text = currentStatus.StatusName;
                 }
 
-                TextBoxDisplayOrder.Text = selectedTask.DisplayOrder.ToString();
                 TextBoxLastUpdated.Text = selectedTask.LastUpdated.ToString();
                 CheckBoxEnabled.Checked= selectedTask.Enabled;
             }
@@ -119,17 +118,9 @@ namespace MyTaskManager
             try
             {
 
-                if (TextBoxTask.Text == "" || TextBoxDisplayOrder.Text == "" || ComboBoxStatus.Text == "")
+                if (TextBoxTask.Text == "" || ComboBoxStatus.Text == "")
                 {
                     GlobalCode.ShowMSGBox("Verify you have entered a task, display order, and status.", MessageBoxIcon.Warning);
-                    return;
-                }
-
-                int testorder;
-
-                if (int.TryParse(TextBoxDisplayOrder.Text, out testorder) == false)
-                {
-                    GlobalCode.ShowMSGBox("Verify that display order is numeric only");
                     return;
                 }
 
@@ -150,7 +141,7 @@ namespace MyTaskManager
                         task.StatusID = currentStatus.ID;
                     }
 
-                    task.DisplayOrder = Convert.ToInt32(TextBoxDisplayOrder.Text);
+                    task.DisplayOrder = 0;
                     task.LastUpdated = DateTime.Now;
                     task.Enabled = CheckBoxEnabled.Checked;
 
@@ -184,7 +175,7 @@ namespace MyTaskManager
                         selectedTask.StatusID = currentStatus.ID;
                     }
 
-                    selectedTask.DisplayOrder = Convert.ToInt32(TextBoxDisplayOrder.Text);
+                    selectedTask.DisplayOrder = selectedTask.DisplayOrder;
                     selectedTask.LastUpdated = DateTime.Now;
                     selectedTask.Enabled = CheckBoxEnabled.Checked;
 
@@ -296,7 +287,7 @@ namespace MyTaskManager
 
                 byte[] buffer = (byte[])o.Attachment;
 
-                string filePath = @"C:\MyTaskManager\OpenedImages\";
+                string filePath = @"C:\MyTaskManager\OpenedFiles\";
                 string fileName = o.Name;
 
                 Directory.CreateDirectory(filePath);
