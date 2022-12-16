@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 
 namespace MyTaskManager
 {
@@ -32,7 +33,7 @@ namespace MyTaskManager
                     layoutPanel.BackColor = Color.Transparent;
                     int height = FlowLayoutPanelLists.Height;
                     layoutPanel.Name = status.ID.ToString();
-                    layoutPanel.MinimumSize = new Size(FlowLayoutPanelLists.Width / 4, height);
+                    layoutPanel.MinimumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
                     layoutPanel.MaximumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
                     layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / Status.GetListOfObjects().Count, height);
                     layoutPanel.BorderStyle = BorderStyle.FixedSingle;
@@ -53,7 +54,7 @@ namespace MyTaskManager
 
                     Label layoutPanelHeader = new Label();
                     layoutPanelHeader.Text = status.StatusName;
-                    layoutPanelHeader.Width = Convert.ToInt32(layoutPanel.Width * .90);
+                    layoutPanelHeader.Width = Convert.ToInt32(layoutPanel.Width * .750);
                     layoutPanelHeader.Font = new Font("Arial", 12, FontStyle.Bold);
                     layoutPanelHeader.Margin = new Padding(0, 5, 0, 5);
 
@@ -71,8 +72,8 @@ namespace MyTaskManager
                         taskLayout.BorderStyle = BorderStyle.FixedSingle;
                         taskLayout.Name = task.ID.ToString();
                         //height = taskLayout.Height;
-                        taskLayout.MinimumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .90, 0, MidpointRounding.ToZero)), 0);
-                        taskLayout.MaximumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .90, 0, MidpointRounding.ToZero)), 0);
+                        taskLayout.MinimumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .95, 0, MidpointRounding.ToZero)), 0);
+                        taskLayout.MaximumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .95, 0, MidpointRounding.ToZero)), 0);
                         taskLayout.AutoSize = true;
                         taskLayout.HorizontalScroll.Enabled = false;
                         taskLayout.MouseDown += TaskLayout_MouseDown;
@@ -95,13 +96,27 @@ namespace MyTaskManager
 
                         taskLayout.Controls.Add(taskheaderLabel);
 
+                        Button newAttachmentButton = new Button();
+                        newAttachmentButton.Text = "Attachment";
+                        newAttachmentButton.FlatAppearance.BorderSize = 0;
+                        newAttachmentButton.FlatStyle = FlatStyle.Flat;
+                        height = 25;
+                        newAttachmentButton.Size = new Size((taskLayout.Width / 3), height);
+                        newAttachmentButton.Margin = new Padding(0);
+                        newAttachmentButton.Padding = new Padding(0);
+                        newAttachmentButton.ForeColor = Color.Red;
+                        newAttachmentButton.Name = task.ID.ToString();
+                        newAttachmentButton.Click += AddAttachment;
+
+                        taskLayout.Controls.Add(newAttachmentButton);
+
 
                         Button newActivityButton = new Button();
-                        newActivityButton.Text = "New Activity";
+                        newActivityButton.Text = "Activity";
                         newActivityButton.FlatAppearance.BorderSize = 0;
                         newActivityButton.FlatStyle = FlatStyle.Flat;
                         height = 25;
-                        newActivityButton.Size = new Size((taskLayout.Width / 2) - 1, height);
+                        newActivityButton.Size = new Size((taskLayout.Width / 3), height);
                         newActivityButton.Margin = new Padding(0);
                         newActivityButton.Padding = new Padding(0);
                         newActivityButton.ForeColor = Color.Blue;
@@ -115,7 +130,7 @@ namespace MyTaskManager
                         editTaskButton.FlatAppearance.BorderSize = 0;
                         editTaskButton.FlatStyle = FlatStyle.Flat;
                         height = 25;
-                        editTaskButton.Size = new Size((taskLayout.Width / 2) - 1, height);
+                        editTaskButton.Size = new Size((taskLayout.Width / 3) - 1, height);
                         editTaskButton.Margin = new Padding(0);
                         editTaskButton.Padding = new Padding(0);
                         editTaskButton.ForeColor = Color.Green;
@@ -138,6 +153,33 @@ namespace MyTaskManager
             catch (Exception ex)
             {
                 GlobalCode.ExceptionMessageBox();
+            }
+        }
+
+        private void AddAttachment(object? sender, EventArgs e)
+        {
+            try
+            {
+                Control control = (Control)sender;
+
+                if (control == null)
+                {
+                    return;
+                }
+
+                Task task = new Task();
+                task = Task.GetObjectByID(control.Name);
+
+                FormNewAttachment attachment = new FormNewAttachment();
+                attachment.selectedTask = task;
+                attachment.ShowDialog();
+                PopulateGrid();
+
+
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
