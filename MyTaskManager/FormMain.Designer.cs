@@ -37,6 +37,7 @@
             this.ButtonNewProject = new System.Windows.Forms.Button();
             this.ButtonManageStatuses = new System.Windows.Forms.Button();
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
+            this.ButtonExportData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewProjects)).BeginInit();
             this.SuspendLayout();
             // 
@@ -114,7 +115,7 @@
             // ButtonManageStatuses
             // 
             this.ButtonManageStatuses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonManageStatuses.Location = new System.Drawing.Point(508, 417);
+            this.ButtonManageStatuses.Location = new System.Drawing.Point(373, 417);
             this.ButtonManageStatuses.Name = "ButtonManageStatuses";
             this.ButtonManageStatuses.Size = new System.Drawing.Size(129, 32);
             this.ButtonManageStatuses.TabIndex = 6;
@@ -135,11 +136,23 @@
             this.CheckBoxEnabled.UseVisualStyleBackColor = true;
             this.CheckBoxEnabled.CheckedChanged += new System.EventHandler(this.CheckBoxEnabled_CheckedChanged);
             // 
+            // ButtonExportData
+            // 
+            this.ButtonExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonExportData.Location = new System.Drawing.Point(508, 417);
+            this.ButtonExportData.Name = "ButtonExportData";
+            this.ButtonExportData.Size = new System.Drawing.Size(129, 32);
+            this.ButtonExportData.TabIndex = 8;
+            this.ButtonExportData.Text = "Export Data";
+            this.ButtonExportData.UseVisualStyleBackColor = true;
+            this.ButtonExportData.Click += new System.EventHandler(this.ButtonExportData_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 461);
+            this.Controls.Add(this.ButtonExportData);
             this.Controls.Add(this.CheckBoxEnabled);
             this.Controls.Add(this.ButtonManageStatuses);
             this.Controls.Add(this.ButtonNewProject);
@@ -171,5 +184,6 @@
         private Button ButtonNewProject;
         private Button ButtonManageStatuses;
         private CheckBox CheckBoxEnabled;
+        private Button ButtonExportData;
     }
 }

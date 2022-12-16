@@ -28,7 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.RichTextBoxActivity = new System.Windows.Forms.RichTextBox();
+            this.MenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemFileBrowser = new System.Windows.Forms.ToolStripMenuItem();
             this.ButtonNewActivity = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.TextBoxTask = new System.Windows.Forms.TextBox();
@@ -43,11 +46,14 @@
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.DataGridViewAttachments = new System.Windows.Forms.DataGridView();
             this.ButtonNewAttachment = new System.Windows.Forms.Button();
+            this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewAttachments)).BeginInit();
             this.SuspendLayout();
             // 
             // RichTextBoxActivity
             // 
+            this.RichTextBoxActivity.ContextMenuStrip = this.MenuStrip;
+            this.RichTextBoxActivity.DetectUrls = false;
             this.RichTextBoxActivity.Location = new System.Drawing.Point(652, 12);
             this.RichTextBoxActivity.Name = "RichTextBoxActivity";
             this.RichTextBoxActivity.ReadOnly = true;
@@ -55,6 +61,20 @@
             this.RichTextBoxActivity.TabIndex = 0;
             this.RichTextBoxActivity.TabStop = false;
             this.RichTextBoxActivity.Text = "";
+            // 
+            // MenuStrip
+            // 
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemFileBrowser});
+            this.MenuStrip.Name = "MenuStrip";
+            this.MenuStrip.Size = new System.Drawing.Size(153, 26);
+            // 
+            // MenuItemFileBrowser
+            // 
+            this.MenuItemFileBrowser.Name = "MenuItemFileBrowser";
+            this.MenuItemFileBrowser.Size = new System.Drawing.Size(152, 22);
+            this.MenuItemFileBrowser.Text = "Open Location";
+            this.MenuItemFileBrowser.Click += new System.EventHandler(this.MenuItemFileBrowser_Click);
             // 
             // ButtonNewActivity
             // 
@@ -213,6 +233,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "FormShowProject";
             this.Load += new System.EventHandler(this.FormProject_Load);
+            this.MenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewAttachments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -236,5 +257,7 @@
         private CheckBox CheckBoxEnabled;
         private DataGridView DataGridViewAttachments;
         private Button ButtonNewAttachment;
+        private ContextMenuStrip MenuStrip;
+        private ToolStripMenuItem MenuItemFileBrowser;
     }
 }

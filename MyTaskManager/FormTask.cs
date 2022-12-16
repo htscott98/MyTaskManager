@@ -360,5 +360,26 @@ namespace MyTaskManager
                 GlobalCode.ExceptionMessageBox();
             }
         }
+
+        private void MenuItemFileBrowser_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (RichTextBoxActivity.SelectedText == null)
+                {
+                    return;
+                }
+
+                string startLocation = RichTextBoxActivity.SelectedText.Trim();
+
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(startLocation) { UseShellExecute = true });
+
+
+            }
+            catch (Exception ex)
+            {
+                GlobalCode.ShowMSGBox("Unable to open location. Verify that you have selected a valid path.", MessageBoxIcon.Error);
+            }
+        }
     }
 }

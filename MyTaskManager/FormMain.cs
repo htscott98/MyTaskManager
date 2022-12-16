@@ -70,6 +70,7 @@ namespace MyTaskManager
             this.DataGridViewProjects.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             this.DataGridViewProjects.Columns["ID"].Visible = false;
 
+
         }
 
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -132,5 +133,67 @@ namespace MyTaskManager
         {
             Application.Exit();
         }
+
+        private void ButtonExportData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (DataGridViewProjects.Rows.Count == 0)
+                {
+                    GlobalCode.ShowMSGBox("No data to export.", MessageBoxIcon.Warning, MessageBoxButtons.OK);
+                    return;
+                }
+
+                DataGridViewProjects.MultiSelect = true;
+                DataGridViewProjects.SelectAll();
+                DataObject dataObj = DataGridViewProjects.GetClipboardContent();
+                DataGridViewProjects.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+                if (dataObj != null)
+                {
+                    Clipboard.SetDataObject(dataObj);
+                }
+
+                Type officeType = Type.GetTypeFromProgID("Excel.Application");
+                if (officeType == null)
+                {
+                    GlobalCode.ShowMSGBox("Microsoft Excel does not exist on this machine.", MessageBoxIcon.Warning, MessageBoxButtons.OK);
+                }
+                else
+                {
+                    Microsoft.Office.Interop.Excel.Application xlexcel;
+                    Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+                    Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+                    object misValue = System.Reflection.Missing.Value;
+                    xlexcel = new Microsoft.Office.Interop.Excel.Application();
+                    xlexcel.Visible = true;
+                    xlWorkBook = xlexcel.Workbooks.Add(misValue);
+                    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                    if (CheckBoxEnabled.Checked == true)
+                    {
+                        xlWorkSheet.Name = "Enabled Tasks";
+                    }
+                    else
+                    {
+                        xlWorkSheet.Name = "Disabled Tasks";
+                    }
+
+
+                    Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
+                    CR.Select();
+                    xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+                    DataGridViewProjects.ClearSelection();
+                    xlWorkSheet.Columns.AutoFit();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
+
     }
 }

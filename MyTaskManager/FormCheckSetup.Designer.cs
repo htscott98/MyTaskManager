@@ -94,11 +94,11 @@
             // 
             this.CheckBoxSQLTables.AutoCheck = false;
             this.CheckBoxSQLTables.AutoSize = true;
-            this.CheckBoxSQLTables.Location = new System.Drawing.Point(36, 277);
+            this.CheckBoxSQLTables.Location = new System.Drawing.Point(127, 277);
             this.CheckBoxSQLTables.Name = "CheckBoxSQLTables";
-            this.CheckBoxSQLTables.Size = new System.Drawing.Size(376, 21);
+            this.CheckBoxSQLTables.Size = new System.Drawing.Size(231, 21);
             this.CheckBoxSQLTables.TabIndex = 6;
-            this.CheckBoxSQLTables.Text = "Create MyTaskManager SQL tables (Tasks, Statuses, Activity)";
+            this.CheckBoxSQLTables.Text = "Create MyTaskManager SQL tables";
             this.CheckBoxSQLTables.UseVisualStyleBackColor = true;
             // 
             // ButtonCancel
@@ -125,11 +125,11 @@
             // 
             this.CheckBoxSQLDatabase.AutoCheck = false;
             this.CheckBoxSQLDatabase.AutoSize = true;
-            this.CheckBoxSQLDatabase.Location = new System.Drawing.Point(36, 250);
+            this.CheckBoxSQLDatabase.Location = new System.Drawing.Point(117, 250);
             this.CheckBoxSQLDatabase.Name = "CheckBoxSQLDatabase";
-            this.CheckBoxSQLDatabase.Size = new System.Drawing.Size(358, 21);
+            this.CheckBoxSQLDatabase.Size = new System.Drawing.Size(250, 21);
             this.CheckBoxSQLDatabase.TabIndex = 10;
-            this.CheckBoxSQLDatabase.Text = "Create MyTaskManager SQL database (MyTaskManager)";
+            this.CheckBoxSQLDatabase.Text = "Create MyTaskManager SQL database";
             this.CheckBoxSQLDatabase.UseVisualStyleBackColor = true;
             // 
             // FormCheckSetup
