@@ -31,14 +31,15 @@
             this.TextBoxActivity = new System.Windows.Forms.TextBox();
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonSave = new System.Windows.Forms.Button();
+            this.LabelSelectedTask = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TextBoxActivity
             // 
-            this.TextBoxActivity.Location = new System.Drawing.Point(12, 12);
+            this.TextBoxActivity.Location = new System.Drawing.Point(12, 56);
             this.TextBoxActivity.Multiline = true;
             this.TextBoxActivity.Name = "TextBoxActivity";
-            this.TextBoxActivity.Size = new System.Drawing.Size(360, 299);
+            this.TextBoxActivity.Size = new System.Drawing.Size(360, 255);
             this.TextBoxActivity.TabIndex = 0;
             // 
             // ButtonCancel
@@ -61,11 +62,20 @@
             this.ButtonSave.UseVisualStyleBackColor = true;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // LabelSelectedTask
+            // 
+            this.LabelSelectedTask.Location = new System.Drawing.Point(12, 9);
+            this.LabelSelectedTask.Name = "LabelSelectedTask";
+            this.LabelSelectedTask.Size = new System.Drawing.Size(360, 44);
+            this.LabelSelectedTask.TabIndex = 10;
+            this.LabelSelectedTask.Text = "label1";
+            // 
             // FormNewActivity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 361);
+            this.Controls.Add(this.LabelSelectedTask);
             this.Controls.Add(this.ButtonCancel);
             this.Controls.Add(this.ButtonSave);
             this.Controls.Add(this.TextBoxActivity);
@@ -87,5 +97,6 @@
         private TextBox TextBoxActivity;
         private Button ButtonCancel;
         private Button ButtonSave;
+        private Label LabelSelectedTask;
     }
 }

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 
 namespace MyTaskManager
 {
@@ -28,23 +20,118 @@ namespace MyTaskManager
             try
             {
 
-                DataGridViewProjects.DataSource = null;
+                FlowLayoutPanelLists.Controls.Clear();
 
-                string sql = "SELECT Tasks.ID,TaskName AS Task,Statuses.StatusName AS Status,LastUpdated AS Updated " +
-                    "FROM MyTaskManager.dbo.Tasks " +
-                    "LEFT OUTER JOIN Statuses ON Statuses.ID = Tasks.StatusID " +
-                    "WHERE TaskName LIKE '%" + TextBoxSearch.Text + "%' AND Tasks.Enabled = '" + CheckBoxEnabled.Checked + "' " +
-                    "ORDER BY Tasks.DisplayOrder ASC";
+                List<Status> allStatuses = Status.GetListOfObjects();
 
-                DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
-
-                if (dt != null && dt.Rows.Count > 0)
+                foreach (Status status in allStatuses)
                 {
-                    DataGridViewProjects.DataSource = dt;
-                    SetDisplayProperties();
+                    FlowLayoutPanel layoutPanel = new FlowLayoutPanel();
+                    layoutPanel.Margin = new Padding(0, 0, 0, 0);
+                    layoutPanel.Padding = new Padding(0);
+                    layoutPanel.BackColor = Color.Transparent;
+                    int height = FlowLayoutPanelLists.Height;
+                    layoutPanel.Name = status.ID.ToString();
+                    layoutPanel.MinimumSize = new Size(FlowLayoutPanelLists.Width / 4, height);
+                    layoutPanel.MaximumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
+                    layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / Status.GetListOfObjects().Count, height);
+                    layoutPanel.BorderStyle = BorderStyle.FixedSingle;
+                    layoutPanel.HorizontalScroll.Visible = false;
+                    layoutPanel.HorizontalScroll.Enabled = false;
+                    layoutPanel.AllowDrop = true;
+                    layoutPanel.HorizontalScroll.Maximum = 0;
+                    layoutPanel.AutoScroll = true;
+                    layoutPanel.Anchor = AnchorStyles.Left;
+                    layoutPanel.Anchor = AnchorStyles.Top;
+                    layoutPanel.Anchor = AnchorStyles.Bottom;
+                    layoutPanel.DragLeave += LayoutPanel_DragLeave;
+                    layoutPanel.DragDrop += LayoutPanel_DragDrop;
+                    layoutPanel.DragEnter += LayoutPanel_DragEnter;
+                    layoutPanel.DragOver += LayoutPanel_DragOver;
+
+                    FlowLayoutPanelLists.Controls.Add(layoutPanel);
+
+                    Label layoutPanelHeader = new Label();
+                    layoutPanelHeader.Text = status.StatusName;
+                    layoutPanelHeader.Width = Convert.ToInt32(layoutPanel.Width * .90);
+                    layoutPanelHeader.Font = new Font("Arial", 12, FontStyle.Bold);
+                    layoutPanelHeader.Margin = new Padding(0, 5, 0, 5);
+
+                    layoutPanel.Controls.Add(layoutPanelHeader);
+
+
+                    List<Task> allTasks = Task.GetListOfObjectsByStatusID(status.ID.ToString());
+
+                    foreach (Task task in allTasks)
+                    {
+                        FlowLayoutPanel taskLayout = new FlowLayoutPanel();
+                        taskLayout.Margin = new Padding(4, 2, 0, 2);
+                        taskLayout.Padding = new Padding(0);
+                        taskLayout.BackColor = SystemColors.ControlLight;
+                        taskLayout.BorderStyle = BorderStyle.FixedSingle;
+                        taskLayout.Name = task.ID.ToString();
+                        //height = taskLayout.Height;
+                        taskLayout.MinimumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .90, 0, MidpointRounding.ToZero)), 0);
+                        taskLayout.MaximumSize = new Size(Convert.ToInt32(Math.Round(layoutPanel.Width * .90, 0, MidpointRounding.ToZero)), 0);
+                        taskLayout.AutoSize = true;
+                        taskLayout.HorizontalScroll.Enabled = false;
+                        taskLayout.MouseDown += TaskLayout_MouseDown;
+
+                        layoutPanel.Controls.Add(taskLayout);
+
+
+                        Label taskheaderLabel = new Label();
+                        taskheaderLabel.Font = new Font("Arial", 12, FontStyle.Bold);
+                        taskheaderLabel.Text = task.TaskName;
+                        taskheaderLabel.BorderStyle = BorderStyle.None;
+                        height = taskheaderLabel.Height;
+                        taskheaderLabel.Size = new Size(taskLayout.Width, height);
+                        taskheaderLabel.Padding = new Padding(0);
+                        taskheaderLabel.Margin = new Padding(0, 5, 0, 5);
+                        taskheaderLabel.Name = task.ID.ToString();
+                        taskheaderLabel.TextAlign = ContentAlignment.MiddleLeft;
+                        taskheaderLabel.AutoSize = true;
+                        taskheaderLabel.MouseDown += ParentDrag;
+
+                        taskLayout.Controls.Add(taskheaderLabel);
+
+
+                        Button newActivityButton = new Button();
+                        newActivityButton.Text = "New Activity";
+                        newActivityButton.FlatAppearance.BorderSize = 0;
+                        newActivityButton.FlatStyle = FlatStyle.Flat;
+                        height = 25;
+                        newActivityButton.Size = new Size((taskLayout.Width / 2) - 1, height);
+                        newActivityButton.Margin = new Padding(0);
+                        newActivityButton.Padding = new Padding(0);
+                        newActivityButton.ForeColor = Color.Blue;
+                        newActivityButton.Name = task.ID.ToString();
+                        newActivityButton.Click += AddActivity;
+
+                        taskLayout.Controls.Add(newActivityButton);
+
+                        Button editTaskButton = new Button();
+                        editTaskButton.Text = "View Task";
+                        editTaskButton.FlatAppearance.BorderSize = 0;
+                        editTaskButton.FlatStyle = FlatStyle.Flat;
+                        height = 25;
+                        editTaskButton.Size = new Size((taskLayout.Width / 2) - 1, height);
+                        editTaskButton.Margin = new Padding(0);
+                        editTaskButton.Padding = new Padding(0);
+                        editTaskButton.ForeColor = Color.Green;
+                        editTaskButton.Name = task.ID.ToString();
+                        editTaskButton.Click += EditTask;
+
+                        taskLayout.Controls.Add(editTaskButton);
+
+
+
+                    }
+
+
 
                 }
-                LabelRowCount.Text = DataGridViewProjects.Rows.Count.ToString();
+
 
 
             }
@@ -54,23 +141,163 @@ namespace MyTaskManager
             }
         }
 
-        private void SetDisplayProperties()
+        private void LayoutPanel_DragOver(object? sender, DragEventArgs e)
         {
-            this.DataGridViewProjects.AlternatingRowsDefaultCellStyle.BackColor = Color.WhiteSmoke;
-            this.DataGridViewProjects.AllowUserToAddRows = false;
-            this.DataGridViewProjects.AllowUserToDeleteRows = false;
-            this.DataGridViewProjects.AllowUserToResizeRows = false;
-            this.DataGridViewProjects.AllowUserToOrderColumns = true;
-            this.DataGridViewProjects.MultiSelect = true;
-            this.DataGridViewProjects.ReadOnly = true;
-            this.DataGridViewProjects.RowHeadersVisible = false;
-            this.DataGridViewProjects.AllowUserToResizeColumns = true;
-            this.DataGridViewProjects.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewProjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.DataGridViewProjects.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            this.DataGridViewProjects.Columns["ID"].Visible = false;
+            Control control = sender as Control;
+            control.BackColor = Color.LightBlue;
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void LayoutPanel_DragEnter(object? sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void LayoutPanel_DragDrop(object? sender, DragEventArgs e)
+        {
+            try
+            {
+                MyWrapper wrapper = (MyWrapper)e.Data.GetData(typeof(MyWrapper));
+
+                Control list = sender as Control;
+                string listID = list.Name;
+
+                list.Controls.Add(wrapper.Control);
+
+                Point p = list.PointToClient(new Point(e.X, e.Y));
+                var item = list.GetChildAtPoint(p);
+                var index = list.Controls.GetChildIndex(item, false);
+
+                if (index <= 0)
+                {
+                    index = 1;
+                }
+
+                list.Controls.SetChildIndex(wrapper.Control, index);
+
+                foreach (Control control in list.Controls)
+                {
+                    if (list.Controls.IndexOf(control) == 0)
+                    {
+                        continue;
+                    }
+
+                    Task taskPosition = new Task();
+                    taskPosition.ID = Convert.ToInt32(control.Name);
+                    taskPosition.DisplayOrder = list.Controls.IndexOf(control);
+                    taskPosition.UpdateDisplayOrder();
+                }
 
 
+                string taskID = wrapper.Control.Name;
+
+                Task task = new Task();
+                task.ID = Convert.ToInt32(taskID);
+                task.StatusID = Convert.ToInt32(listID);
+                task.UpdateTaskList();
+
+                PopulateGrid();
+
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private void LayoutPanel_DragLeave(object? sender, EventArgs e)
+        {
+            Control control = sender as Control;
+            control.BackColor = SystemColors.Control;
+        }
+
+        private void ParentDrag(object? sender, MouseEventArgs e)
+        {
+            Control control = sender as Control;
+            control.DoDragDrop(new MyWrapper(control.Parent), DragDropEffects.All);
+        }
+
+        internal partial class MyWrapper
+        {
+            private Control _control;
+
+            public MyWrapper(Control control)
+            {
+                _control = control;
+            }
+
+            public Control Control
+            {
+                get
+                {
+                    return _control;
+                }
+            }
+        }
+
+        private void TaskLayout_MouseDown(object? sender, MouseEventArgs e)
+        {
+            Control control = sender as Control;
+            control.DoDragDrop(new MyWrapper(control), DragDropEffects.All);
+        }
+
+
+
+        private void EditTask(object? sender, EventArgs e)
+        {
+            try
+            {
+                Control sent = sender as Control;
+
+                Task taskTask = Task.GetObjectByID(sent.Name);
+
+                if (taskTask == null)
+                {
+                    return;
+                }
+
+                FormTask f = new FormTask();
+                f.selectedTask = taskTask;
+                f.ShowDialog();
+                PopulateGrid();
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private void AddActivity(object? sender, EventArgs e)
+        {
+            try
+            {
+                Control control = (Control)sender;
+
+                if (control == null)
+                {
+                    return;
+                }
+
+                Task task = new Task();
+                task = Task.GetObjectByID(control.Name);
+
+                FormNewActivity activity = new FormNewActivity();
+                activity.selectedTask = task;
+                activity.ShowDialog();
+                PopulateGrid();
+
+
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -78,38 +305,15 @@ namespace MyTaskManager
             PopulateGrid();
         }
 
-        private void DataGridViewProjects_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                string id = DataGridViewProjects.SelectedRows[0].Cells["ID"].Value.ToString();
-
-                if (string.IsNullOrEmpty(id) == true)
-                {
-                    return;
-                }
-
-                Task task = Task.GetObjectByID(id);
-
-                if (task != null && task.ID != 0)
-                {
-                    FormTask f = new FormTask();
-                    f.newTask = false;
-                    f.selectedTask = task;
-                    f.ShowDialog();
-                    PopulateGrid();
-                }
-
-
-            }
-            catch (Exception ex)
-            {
-                GlobalCode.ExceptionMessageBox();
-            }
-        }
-
         private void ButtonNewProject_Click(object sender, EventArgs e)
         {
+            if (Status.GetListOfObjects().Count == 0)
+            {
+                GlobalCode.ShowMSGBox("You must create a status before adding a task.", MessageBoxIcon.Warning);
+                return;
+            }
+
+
             FormTask f = new FormTask();
             f.newTask = true;
             f.selectedTask = null;
@@ -132,67 +336,6 @@ namespace MyTaskManager
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void ButtonExportData_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (DataGridViewProjects.Rows.Count == 0)
-                {
-                    GlobalCode.ShowMSGBox("No data to export.", MessageBoxIcon.Warning, MessageBoxButtons.OK);
-                    return;
-                }
-
-                DataGridViewProjects.MultiSelect = true;
-                DataGridViewProjects.SelectAll();
-                DataObject dataObj = DataGridViewProjects.GetClipboardContent();
-                DataGridViewProjects.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
-                if (dataObj != null)
-                {
-                    Clipboard.SetDataObject(dataObj);
-                }
-
-                Type officeType = Type.GetTypeFromProgID("Excel.Application");
-                if (officeType == null)
-                {
-                    GlobalCode.ShowMSGBox("Microsoft Excel does not exist on this machine.", MessageBoxIcon.Warning, MessageBoxButtons.OK);
-                }
-                else
-                {
-                    Microsoft.Office.Interop.Excel.Application xlexcel;
-                    Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-                    Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-                    object misValue = System.Reflection.Missing.Value;
-                    xlexcel = new Microsoft.Office.Interop.Excel.Application();
-                    xlexcel.Visible = true;
-                    xlWorkBook = xlexcel.Workbooks.Add(misValue);
-                    xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-
-                    if (CheckBoxEnabled.Checked == true)
-                    {
-                        xlWorkSheet.Name = "Enabled Tasks";
-                    }
-                    else
-                    {
-                        xlWorkSheet.Name = "Disabled Tasks";
-                    }
-
-
-                    Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
-                    CR.Select();
-                    xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
-                    DataGridViewProjects.ClearSelection();
-                    xlWorkSheet.Columns.AutoFit();
-
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-            }
-
         }
 
     }

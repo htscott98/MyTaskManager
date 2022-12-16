@@ -139,6 +139,38 @@ namespace MyTaskManager
             return objList;
         }
 
+        public static List<Task> GetListOfObjectsByStatusID(string statusID)
+        {
+            List<Task> objList = new List<Task>();
+            string strSQL = "";
+            try
+            {
+                strSQL = GetSQLSelect() +
+                "FROM Tasks " +
+                "WHERE StatusID = '" + statusID + "' AND Enabled = 1" +
+                "ORDER BY DisplayOrder ASC";
+
+                DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), strSQL);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow r in dt.Rows)
+                    {
+                        Task obj = new Task(r);
+
+                        if (obj != null)
+                            objList.Add(obj);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return objList;
+        }
+
         public static Task GetObjectByID(string id)
         {
             Task obj = new Task();
@@ -219,6 +251,60 @@ namespace MyTaskManager
                 strSQL = "UPDATE Tasks " +
                 "SET TaskName=@TaskName, StatusID=@StatusID, LastUpdated=@LastUpdated, DisplayOrder=@DisplayOrder, " +
                 "Enabled=@Enabled " +
+                "WHERE ID = @ID ";
+
+                b = Execute.ExecuteStatementReturnBool(Connection.InitMyTaskManagerConnection(), strSQL, keyValuePairs);
+
+            }
+            catch (Exception ex)
+            {
+                
+
+                b = false;
+            }
+
+            return b;
+        }
+
+        public bool UpdateDisplayOrder()
+        {
+            string strSQL = "";
+            bool b = false;
+            try
+            {
+                Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+
+                keyValuePairs.Add("@ID", _ID.ToString());
+                keyValuePairs.Add("@DisplayOrder", _DisplayOrder.ToString());
+                strSQL = "UPDATE Tasks " +
+                "SET DisplayOrder=@DisplayOrder " +
+                "WHERE ID = @ID ";
+
+                b = Execute.ExecuteStatementReturnBool(Connection.InitMyTaskManagerConnection(), strSQL, keyValuePairs);
+
+            }
+            catch (Exception ex)
+            {
+                
+
+                b = false;
+            }
+
+            return b;
+        }
+
+        public bool UpdateTaskList()
+        {
+            string strSQL = "";
+            bool b = false;
+            try
+            {
+                Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+
+                keyValuePairs.Add("@ID", _ID.ToString());
+                keyValuePairs.Add("@StatusID", _StatusID.ToString());
+                strSQL = "UPDATE Tasks " +
+                "SET StatusID=@StatusID " +
                 "WHERE ID = @ID ";
 
                 b = Execute.ExecuteStatementReturnBool(Connection.InitMyTaskManagerConnection(), strSQL, keyValuePairs);

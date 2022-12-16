@@ -1,13 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace MyTaskManager
 {
@@ -29,6 +21,8 @@ namespace MyTaskManager
             {
                 this.Close();
             }
+
+            LabelSelectedTask.Text = selectedTask.TaskName;
 
         }
 

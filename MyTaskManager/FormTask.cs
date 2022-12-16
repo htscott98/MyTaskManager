@@ -1,15 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
+
 
 namespace MyTaskManager
 {
@@ -105,6 +95,7 @@ namespace MyTaskManager
 
                 foreach (Activity activity in allActivity)
                 {
+
                     RichTextBoxActivity.SelectionFont = new Font(RichTextBoxActivity.Font.Name, 12, FontStyle.Bold);
                     RichTextBoxActivity.AppendText(activity.ActivityTimestamp.ToString() + "\n");
                     RichTextBoxActivity.SelectionFont = new Font(RichTextBoxActivity.Font.Name, 10, FontStyle.Regular);
@@ -128,9 +119,9 @@ namespace MyTaskManager
             try
             {
 
-                if (TextBoxTask.Text == "" || TextBoxDisplayOrder.Text == "")
+                if (TextBoxTask.Text == "" || TextBoxDisplayOrder.Text == "" || ComboBoxStatus.Text == "")
                 {
-                    GlobalCode.ShowMSGBox("Verify you have entered a task and display order.", MessageBoxIcon.Warning);
+                    GlobalCode.ShowMSGBox("Verify you have entered a task, display order, and status.", MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -227,7 +218,15 @@ namespace MyTaskManager
                 {
                     DataGridViewAttachments.DataSource = dt;
                     SetDisplayProperties();
+
+
                 }
+
+
+   
+
+
+
 
             }
             catch (Exception ex)

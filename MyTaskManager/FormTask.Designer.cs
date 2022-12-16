@@ -56,10 +56,10 @@
             // 
             this.RichTextBoxActivity.ContextMenuStrip = this.MenuStrip;
             this.RichTextBoxActivity.DetectUrls = false;
-            this.RichTextBoxActivity.Location = new System.Drawing.Point(326, 32);
+            this.RichTextBoxActivity.Location = new System.Drawing.Point(323, 32);
             this.RichTextBoxActivity.Name = "RichTextBoxActivity";
             this.RichTextBoxActivity.ReadOnly = true;
-            this.RichTextBoxActivity.Size = new System.Drawing.Size(320, 379);
+            this.RichTextBoxActivity.Size = new System.Drawing.Size(323, 379);
             this.RichTextBoxActivity.TabIndex = 0;
             this.RichTextBoxActivity.TabStop = false;
             this.RichTextBoxActivity.Text = "";
@@ -192,7 +192,7 @@
             this.DataGridViewAttachments.Location = new System.Drawing.Point(652, 32);
             this.DataGridViewAttachments.Name = "DataGridViewAttachments";
             this.DataGridViewAttachments.RowTemplate.Height = 25;
-            this.DataGridViewAttachments.Size = new System.Drawing.Size(320, 379);
+            this.DataGridViewAttachments.Size = new System.Drawing.Size(320, 377);
             this.DataGridViewAttachments.TabIndex = 12;
             this.DataGridViewAttachments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewAttachments_CellDoubleClick);
             this.DataGridViewAttachments.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewAttachments_CellMouseClick);

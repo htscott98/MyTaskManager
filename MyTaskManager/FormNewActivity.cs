@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace MyTaskManager
+﻿namespace MyTaskManager
 {
     public partial class FormNewActivity : Form
     {
@@ -74,6 +64,8 @@ namespace MyTaskManager
             {
                 this.Close();
             }
+
+            LabelSelectedTask.Text = selectedTask.TaskName;
 
 
         }

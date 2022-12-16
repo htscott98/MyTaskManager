@@ -32,12 +32,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ButtonFindFile = new System.Windows.Forms.Button();
             this.ButtonUpload = new System.Windows.Forms.Button();
+            this.LabelSelectedTask = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TextBoxFile
             // 
             this.TextBoxFile.Enabled = false;
-            this.TextBoxFile.Location = new System.Drawing.Point(12, 35);
+            this.TextBoxFile.Location = new System.Drawing.Point(12, 73);
             this.TextBoxFile.Name = "TextBoxFile";
             this.TextBoxFile.Size = new System.Drawing.Size(279, 25);
             this.TextBoxFile.TabIndex = 0;
@@ -45,7 +46,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 17);
             this.label1.TabIndex = 1;
@@ -53,7 +54,7 @@
             // 
             // ButtonFindFile
             // 
-            this.ButtonFindFile.Location = new System.Drawing.Point(297, 28);
+            this.ButtonFindFile.Location = new System.Drawing.Point(297, 68);
             this.ButtonFindFile.Name = "ButtonFindFile";
             this.ButtonFindFile.Size = new System.Drawing.Size(75, 32);
             this.ButtonFindFile.TabIndex = 2;
@@ -63,7 +64,7 @@
             // 
             // ButtonUpload
             // 
-            this.ButtonUpload.Location = new System.Drawing.Point(130, 91);
+            this.ButtonUpload.Location = new System.Drawing.Point(130, 117);
             this.ButtonUpload.Name = "ButtonUpload";
             this.ButtonUpload.Size = new System.Drawing.Size(124, 32);
             this.ButtonUpload.TabIndex = 3;
@@ -71,11 +72,20 @@
             this.ButtonUpload.UseVisualStyleBackColor = true;
             this.ButtonUpload.Click += new System.EventHandler(this.ButtonUpload_Click);
             // 
+            // LabelSelectedTask
+            // 
+            this.LabelSelectedTask.Location = new System.Drawing.Point(12, 9);
+            this.LabelSelectedTask.Name = "LabelSelectedTask";
+            this.LabelSelectedTask.Size = new System.Drawing.Size(360, 44);
+            this.LabelSelectedTask.TabIndex = 11;
+            this.LabelSelectedTask.Text = "label1";
+            // 
             // FormNewAttachment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 161);
+            this.Controls.Add(this.LabelSelectedTask);
             this.Controls.Add(this.ButtonUpload);
             this.Controls.Add(this.ButtonFindFile);
             this.Controls.Add(this.label1);
@@ -99,5 +109,6 @@
         private Label label1;
         private Button ButtonFindFile;
         private Button ButtonUpload;
+        private Label LabelSelectedTask;
     }
 }

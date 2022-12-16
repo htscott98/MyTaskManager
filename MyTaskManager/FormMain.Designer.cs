@@ -28,83 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.DataGridViewProjects = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TextBoxSearch = new System.Windows.Forms.TextBox();
-            this.LabelRowCount = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.ButtonNewProject = new System.Windows.Forms.Button();
             this.ButtonManageStatuses = new System.Windows.Forms.Button();
-            this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
-            this.ButtonExportData = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewProjects)).BeginInit();
+            this.FlowLayoutPanelLists = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
-            // 
-            // DataGridViewProjects
-            // 
-            this.DataGridViewProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataGridViewProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.DataGridViewProjects.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataGridViewProjects.Location = new System.Drawing.Point(12, 60);
-            this.DataGridViewProjects.Name = "DataGridViewProjects";
-            this.DataGridViewProjects.RowTemplate.Height = 25;
-            this.DataGridViewProjects.Size = new System.Drawing.Size(760, 351);
-            this.DataGridViewProjects.TabIndex = 0;
-            this.DataGridViewProjects.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewProjects_CellDoubleClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Search";
-            // 
-            // TextBoxSearch
-            // 
-            this.TextBoxSearch.Location = new System.Drawing.Point(12, 29);
-            this.TextBoxSearch.Name = "TextBoxSearch";
-            this.TextBoxSearch.Size = new System.Drawing.Size(399, 25);
-            this.TextBoxSearch.TabIndex = 2;
-            this.TextBoxSearch.TextChanged += new System.EventHandler(this.TextBoxSearch_TextChanged);
-            // 
-            // LabelRowCount
-            // 
-            this.LabelRowCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LabelRowCount.AutoSize = true;
-            this.LabelRowCount.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LabelRowCount.Location = new System.Drawing.Point(12, 417);
-            this.LabelRowCount.Name = "LabelRowCount";
-            this.LabelRowCount.Size = new System.Drawing.Size(19, 18);
-            this.LabelRowCount.TabIndex = 3;
-            this.LabelRowCount.Text = "0";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label2.Location = new System.Drawing.Point(617, 37);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(155, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Double click to open task";
             // 
             // ButtonNewProject
             // 
             this.ButtonNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonNewProject.Location = new System.Drawing.Point(643, 417);
+            this.ButtonNewProject.Location = new System.Drawing.Point(843, 12);
             this.ButtonNewProject.Name = "ButtonNewProject";
             this.ButtonNewProject.Size = new System.Drawing.Size(129, 32);
             this.ButtonNewProject.TabIndex = 5;
@@ -115,7 +47,7 @@
             // ButtonManageStatuses
             // 
             this.ButtonManageStatuses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonManageStatuses.Location = new System.Drawing.Point(373, 417);
+            this.ButtonManageStatuses.Location = new System.Drawing.Point(708, 12);
             this.ButtonManageStatuses.Name = "ButtonManageStatuses";
             this.ButtonManageStatuses.Size = new System.Drawing.Size(129, 32);
             this.ButtonManageStatuses.TabIndex = 6;
@@ -123,67 +55,42 @@
             this.ButtonManageStatuses.UseVisualStyleBackColor = true;
             this.ButtonManageStatuses.Click += new System.EventHandler(this.ButtonManageStatuses_Click);
             // 
-            // CheckBoxEnabled
+            // FlowLayoutPanelLists
             // 
-            this.CheckBoxEnabled.AutoSize = true;
-            this.CheckBoxEnabled.Checked = true;
-            this.CheckBoxEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CheckBoxEnabled.Location = new System.Drawing.Point(417, 33);
-            this.CheckBoxEnabled.Name = "CheckBoxEnabled";
-            this.CheckBoxEnabled.Size = new System.Drawing.Size(74, 21);
-            this.CheckBoxEnabled.TabIndex = 7;
-            this.CheckBoxEnabled.Text = "Enabled";
-            this.CheckBoxEnabled.UseVisualStyleBackColor = true;
-            this.CheckBoxEnabled.CheckedChanged += new System.EventHandler(this.CheckBoxEnabled_CheckedChanged);
-            // 
-            // ButtonExportData
-            // 
-            this.ButtonExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonExportData.Location = new System.Drawing.Point(508, 417);
-            this.ButtonExportData.Name = "ButtonExportData";
-            this.ButtonExportData.Size = new System.Drawing.Size(129, 32);
-            this.ButtonExportData.TabIndex = 8;
-            this.ButtonExportData.Text = "Export Data";
-            this.ButtonExportData.UseVisualStyleBackColor = true;
-            this.ButtonExportData.Click += new System.EventHandler(this.ButtonExportData_Click);
+            this.FlowLayoutPanelLists.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FlowLayoutPanelLists.AutoScroll = true;
+            this.FlowLayoutPanelLists.Location = new System.Drawing.Point(12, 50);
+            this.FlowLayoutPanelLists.Name = "FlowLayoutPanelLists";
+            this.FlowLayoutPanelLists.Size = new System.Drawing.Size(960, 699);
+            this.FlowLayoutPanelLists.TabIndex = 9;
+            this.FlowLayoutPanelLists.WrapContents = false;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
-            this.Controls.Add(this.ButtonExportData);
-            this.Controls.Add(this.CheckBoxEnabled);
+            this.ClientSize = new System.Drawing.Size(984, 761);
+            this.Controls.Add(this.FlowLayoutPanelLists);
             this.Controls.Add(this.ButtonManageStatuses);
             this.Controls.Add(this.ButtonNewProject);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.LabelRowCount);
-            this.Controls.Add(this.TextBoxSearch);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.DataGridViewProjects);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MinimumSize = new System.Drawing.Size(800, 500);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1000, 800);
+            this.MinimumSize = new System.Drawing.Size(1000, 800);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewProjects)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private DataGridView DataGridViewProjects;
-        private Label label1;
-        private TextBox TextBoxSearch;
-        private Label LabelRowCount;
-        private Label label2;
         private Button ButtonNewProject;
         private Button ButtonManageStatuses;
-        private CheckBox CheckBoxEnabled;
-        private Button ButtonExportData;
+        private FlowLayoutPanel FlowLayoutPanelLists;
     }
 }
