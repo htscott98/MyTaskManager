@@ -46,6 +46,8 @@
             this.CheckBoxEnabled = new System.Windows.Forms.CheckBox();
             this.DataGridViewAttachments = new System.Windows.Forms.DataGridView();
             this.ButtonNewAttachment = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewAttachments)).BeginInit();
             this.SuspendLayout();
@@ -54,10 +56,10 @@
             // 
             this.RichTextBoxActivity.ContextMenuStrip = this.MenuStrip;
             this.RichTextBoxActivity.DetectUrls = false;
-            this.RichTextBoxActivity.Location = new System.Drawing.Point(652, 12);
+            this.RichTextBoxActivity.Location = new System.Drawing.Point(326, 32);
             this.RichTextBoxActivity.Name = "RichTextBoxActivity";
             this.RichTextBoxActivity.ReadOnly = true;
-            this.RichTextBoxActivity.Size = new System.Drawing.Size(320, 399);
+            this.RichTextBoxActivity.Size = new System.Drawing.Size(320, 379);
             this.RichTextBoxActivity.TabIndex = 0;
             this.RichTextBoxActivity.TabStop = false;
             this.RichTextBoxActivity.Text = "";
@@ -78,7 +80,7 @@
             // 
             // ButtonNewActivity
             // 
-            this.ButtonNewActivity.Location = new System.Drawing.Point(827, 417);
+            this.ButtonNewActivity.Location = new System.Drawing.Point(501, 417);
             this.ButtonNewActivity.Name = "ButtonNewActivity";
             this.ButtonNewActivity.Size = new System.Drawing.Size(145, 32);
             this.ButtonNewActivity.TabIndex = 6;
@@ -100,7 +102,7 @@
             this.TextBoxTask.Location = new System.Drawing.Point(12, 32);
             this.TextBoxTask.Multiline = true;
             this.TextBoxTask.Name = "TextBoxTask";
-            this.TextBoxTask.Size = new System.Drawing.Size(305, 128);
+            this.TextBoxTask.Size = new System.Drawing.Size(305, 235);
             this.TextBoxTask.TabIndex = 1;
             // 
             // ButtonSave
@@ -126,7 +128,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 163);
+            this.label2.Location = new System.Drawing.Point(12, 270);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 17);
             this.label2.TabIndex = 6;
@@ -135,14 +137,14 @@
             // ComboBoxStatus
             // 
             this.ComboBoxStatus.FormattingEnabled = true;
-            this.ComboBoxStatus.Location = new System.Drawing.Point(12, 183);
+            this.ComboBoxStatus.Location = new System.Drawing.Point(12, 290);
             this.ComboBoxStatus.Name = "ComboBoxStatus";
             this.ComboBoxStatus.Size = new System.Drawing.Size(305, 25);
             this.ComboBoxStatus.TabIndex = 2;
             // 
             // TextBoxDisplayOrder
             // 
-            this.TextBoxDisplayOrder.Location = new System.Drawing.Point(12, 231);
+            this.TextBoxDisplayOrder.Location = new System.Drawing.Point(12, 338);
             this.TextBoxDisplayOrder.Name = "TextBoxDisplayOrder";
             this.TextBoxDisplayOrder.Size = new System.Drawing.Size(305, 25);
             this.TextBoxDisplayOrder.TabIndex = 3;
@@ -150,7 +152,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 211);
+            this.label3.Location = new System.Drawing.Point(12, 318);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 17);
             this.label3.TabIndex = 9;
@@ -159,7 +161,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 259);
+            this.label4.Location = new System.Drawing.Point(12, 366);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(86, 17);
             this.label4.TabIndex = 11;
@@ -167,17 +169,17 @@
             // 
             // TextBoxLastUpdated
             // 
-            this.TextBoxLastUpdated.Location = new System.Drawing.Point(12, 279);
+            this.TextBoxLastUpdated.Location = new System.Drawing.Point(12, 386);
             this.TextBoxLastUpdated.Name = "TextBoxLastUpdated";
             this.TextBoxLastUpdated.ReadOnly = true;
-            this.TextBoxLastUpdated.Size = new System.Drawing.Size(305, 25);
+            this.TextBoxLastUpdated.Size = new System.Drawing.Size(225, 25);
             this.TextBoxLastUpdated.TabIndex = 10;
             this.TextBoxLastUpdated.TabStop = false;
             // 
             // CheckBoxEnabled
             // 
             this.CheckBoxEnabled.AutoSize = true;
-            this.CheckBoxEnabled.Location = new System.Drawing.Point(12, 310);
+            this.CheckBoxEnabled.Location = new System.Drawing.Point(243, 388);
             this.CheckBoxEnabled.Name = "CheckBoxEnabled";
             this.CheckBoxEnabled.Size = new System.Drawing.Size(74, 21);
             this.CheckBoxEnabled.TabIndex = 4;
@@ -187,17 +189,17 @@
             // DataGridViewAttachments
             // 
             this.DataGridViewAttachments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewAttachments.Location = new System.Drawing.Point(323, 12);
+            this.DataGridViewAttachments.Location = new System.Drawing.Point(652, 32);
             this.DataGridViewAttachments.Name = "DataGridViewAttachments";
             this.DataGridViewAttachments.RowTemplate.Height = 25;
-            this.DataGridViewAttachments.Size = new System.Drawing.Size(320, 399);
+            this.DataGridViewAttachments.Size = new System.Drawing.Size(320, 379);
             this.DataGridViewAttachments.TabIndex = 12;
             this.DataGridViewAttachments.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewAttachments_CellDoubleClick);
             this.DataGridViewAttachments.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridViewAttachments_CellMouseClick);
             // 
             // ButtonNewAttachment
             // 
-            this.ButtonNewAttachment.Location = new System.Drawing.Point(498, 417);
+            this.ButtonNewAttachment.Location = new System.Drawing.Point(827, 417);
             this.ButtonNewAttachment.Name = "ButtonNewAttachment";
             this.ButtonNewAttachment.Size = new System.Drawing.Size(145, 32);
             this.ButtonNewAttachment.TabIndex = 13;
@@ -205,11 +207,31 @@
             this.ButtonNewAttachment.UseVisualStyleBackColor = true;
             this.ButtonNewAttachment.Click += new System.EventHandler(this.ButtonNewAttachment_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(652, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 17);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Attachments";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(326, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(48, 17);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Activity";
+            // 
             // FormTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 461);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.ButtonNewAttachment);
             this.Controls.Add(this.DataGridViewAttachments);
             this.Controls.Add(this.CheckBoxEnabled);
@@ -259,5 +281,7 @@
         private Button ButtonNewAttachment;
         private ContextMenuStrip MenuStrip;
         private ToolStripMenuItem MenuItemFileBrowser;
+        private Label label5;
+        private Label label6;
     }
 }
