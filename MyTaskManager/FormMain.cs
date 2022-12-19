@@ -23,6 +23,11 @@ namespace MyTaskManager
 
                 FlowLayoutPanelLists.Controls.Clear();
 
+                if (Status.GetListOfObjects().Count == 0)
+                {
+                    return;
+                }
+
 
                 if (CheckBoxEnabled.Checked == false)
                 {
@@ -31,9 +36,7 @@ namespace MyTaskManager
                     layoutPanel.Padding = new Padding(0);
                     layoutPanel.BackColor = Color.Transparent;
                     int height = FlowLayoutPanelLists.Height;
-                    layoutPanel.MinimumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
-                    layoutPanel.MaximumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
-                    layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / Status.GetListOfObjects().Count, height);
+                    layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 3, height);
                     layoutPanel.BorderStyle = BorderStyle.FixedSingle;
                     layoutPanel.HorizontalScroll.Visible = false;
                     layoutPanel.HorizontalScroll.Enabled = false;
@@ -86,6 +89,7 @@ namespace MyTaskManager
                         taskheaderLabel.MouseDown += ParentDrag;
 
                         taskLayout.Controls.Add(taskheaderLabel);
+                        taskLayout.SetFlowBreak(taskheaderLabel, true);
 
                         Button newAttachmentButton = new Button();
                         newAttachmentButton.Text = "New File";
@@ -129,6 +133,7 @@ namespace MyTaskManager
                         editTaskButton.Click += EditTask;
 
                         taskLayout.Controls.Add(editTaskButton);
+                        taskLayout.SetFlowBreak(editTaskButton, true);
 
                         Label layoutUpdated = new Label();
                         layoutUpdated.Text = "Last Updated: " + task.LastUpdated.ToString();
@@ -160,9 +165,7 @@ namespace MyTaskManager
                         layoutPanel.BackColor = Color.Transparent;
                         int height = FlowLayoutPanelLists.Height;
                         layoutPanel.Name = status.ID.ToString();
-                        layoutPanel.MinimumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
-                        layoutPanel.MaximumSize = new Size(FlowLayoutPanelLists.Width / 3, height);
-                        layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / Status.GetListOfObjects().Count, height);
+                        layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 3, height);
                         layoutPanel.BorderStyle = BorderStyle.FixedSingle;
                         layoutPanel.HorizontalScroll.Visible = false;
                         layoutPanel.HorizontalScroll.Enabled = false;
@@ -221,6 +224,7 @@ namespace MyTaskManager
                             taskheaderLabel.MouseDown += ParentDrag;
 
                             taskLayout.Controls.Add(taskheaderLabel);
+                            taskLayout.SetFlowBreak(taskheaderLabel, true);
 
                             Button newAttachmentButton = new Button();
                             newAttachmentButton.Text = "New File";
@@ -264,6 +268,7 @@ namespace MyTaskManager
                             editTaskButton.Click += EditTask;
 
                             taskLayout.Controls.Add(editTaskButton);
+                            taskLayout.SetFlowBreak(editTaskButton, true);
 
 
                             Label layoutUpdated = new Label();
