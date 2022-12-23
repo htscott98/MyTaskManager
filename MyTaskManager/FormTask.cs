@@ -289,8 +289,6 @@ namespace MyTaskManager
 
                 string filePath = @"C:\MyTaskManager\OpenedFiles\";
                 string fileName = o.Name;
-
-                Directory.CreateDirectory(filePath);
                 File.WriteAllBytes(filePath + fileName, buffer);
 
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(filePath + fileName) { UseShellExecute = true });

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace MyTaskManager
@@ -391,7 +392,7 @@ namespace MyTaskManager
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -454,7 +455,7 @@ namespace MyTaskManager
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -481,7 +482,7 @@ namespace MyTaskManager
             }
             catch (Exception ex)
             {
-                
+
             }
         }
 
@@ -503,6 +504,16 @@ namespace MyTaskManager
 
         private void CheckBoxEnabled_CheckedChanged(object sender, EventArgs e)
         {
+            if (CheckBoxEnabled.Checked == true)
+            {
+                ButtonExportData.Enabled = true;
+            }
+            else
+            {
+                ButtonExportData.Enabled = false;
+            }
+
+
             PopulateGrid();
         }
 
@@ -518,5 +529,106 @@ namespace MyTaskManager
             Application.Exit();
         }
 
+        private void ButtonExportData_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application excel = null;
+            Microsoft.Office.Interop.Excel.Workbook excelworkBook = null;
+            Microsoft.Office.Interop.Excel.Worksheet excelSheet = null;
+
+
+            try
+            {
+                
+
+
+
+                string sql = "SELECT TaskName AS Task, Statuses.StatusName AS Status, LastUpdated " +
+                    "FROM Tasks " +
+                    "INNER JOIN Statuses ON Statuses.ID = Tasks.StatusID " +
+                    "WHERE Enabled = 1 " +
+                    "ORDER BY LastUpdated DESC";
+
+
+                DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitMyTaskManagerConnection(), sql);
+
+                if (dt == null || dt.Rows.Count == 0)
+                {
+                    GlobalCode.ShowMSGBox("No active projects to export.", MessageBoxIcon.Warning);
+                    return;
+                }
+
+                excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.Visible = false;
+                excel.DisplayAlerts = false;
+                excelworkBook = excel.Workbooks.Add(Type.Missing);
+
+                excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelworkBook.ActiveSheet;
+                excelSheet.Name = "Enabled Projects";
+
+                int rowIndex = 1;
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int colIndex = 1;
+
+                    if (rowIndex == 1)
+                    {
+                        foreach (DataColumn col in dt.Columns)
+                        {
+
+                            excelSheet.Cells[rowIndex, colIndex].Value = col.ColumnName;
+
+                            colIndex++;
+
+                        }
+
+                        rowIndex++;
+                        colIndex = 1;
+
+                    }
+
+                    foreach (DataColumn col in dt.Columns)
+                    {
+
+                        string fieldValue = dr[col].ToString();
+                        excelSheet.Cells[rowIndex, colIndex].Value = fieldValue;
+
+                        colIndex++;
+
+                    }
+
+                    rowIndex++;
+
+                }
+
+
+                excelSheet.Columns.AutoFit();
+
+                string fileName = @"C:\MyTaskManager\OpenedFiles\ProjectExport_" + DateTime.Now.ToString("MMddyyyy") + ".xlsx";
+                excelworkBook.SaveAs(fileName);
+                excelworkBook.Close(0);
+                excel.Quit();
+
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelworkBook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
+
+                Process.Start(new ProcessStartInfo(fileName) {UseShellExecute = true });
+
+            }
+            catch (Exception ex)
+            {
+                excelworkBook.Close(0);
+                excel.Quit();
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelworkBook);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelSheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(excel);
+
+
+                excelworkBook.Close(0);
+                excel.Quit();
+                GlobalCode.ExceptionMessageBox();
+            }
+        }
     }
 }

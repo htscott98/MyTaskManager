@@ -38,6 +38,7 @@
             this.ButtonCancel = new System.Windows.Forms.Button();
             this.ButtonRunSetup = new System.Windows.Forms.Button();
             this.CheckBoxSQLDatabase = new System.Windows.Forms.CheckBox();
+            this.CheckBoxFileDirectory = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -94,7 +95,7 @@
             // 
             this.CheckBoxSQLTables.AutoCheck = false;
             this.CheckBoxSQLTables.AutoSize = true;
-            this.CheckBoxSQLTables.Location = new System.Drawing.Point(127, 277);
+            this.CheckBoxSQLTables.Location = new System.Drawing.Point(127, 304);
             this.CheckBoxSQLTables.Name = "CheckBoxSQLTables";
             this.CheckBoxSQLTables.Size = new System.Drawing.Size(231, 21);
             this.CheckBoxSQLTables.TabIndex = 6;
@@ -113,7 +114,7 @@
             // 
             // ButtonRunSetup
             // 
-            this.ButtonRunSetup.Location = new System.Drawing.Point(184, 304);
+            this.ButtonRunSetup.Location = new System.Drawing.Point(184, 331);
             this.ButtonRunSetup.Name = "ButtonRunSetup";
             this.ButtonRunSetup.Size = new System.Drawing.Size(116, 32);
             this.ButtonRunSetup.TabIndex = 9;
@@ -125,18 +126,30 @@
             // 
             this.CheckBoxSQLDatabase.AutoCheck = false;
             this.CheckBoxSQLDatabase.AutoSize = true;
-            this.CheckBoxSQLDatabase.Location = new System.Drawing.Point(117, 250);
+            this.CheckBoxSQLDatabase.Location = new System.Drawing.Point(117, 277);
             this.CheckBoxSQLDatabase.Name = "CheckBoxSQLDatabase";
             this.CheckBoxSQLDatabase.Size = new System.Drawing.Size(250, 21);
             this.CheckBoxSQLDatabase.TabIndex = 10;
             this.CheckBoxSQLDatabase.Text = "Create MyTaskManager SQL database";
             this.CheckBoxSQLDatabase.UseVisualStyleBackColor = true;
             // 
+            // CheckBoxFileDirectory
+            // 
+            this.CheckBoxFileDirectory.AutoCheck = false;
+            this.CheckBoxFileDirectory.AutoSize = true;
+            this.CheckBoxFileDirectory.Location = new System.Drawing.Point(171, 250);
+            this.CheckBoxFileDirectory.Name = "CheckBoxFileDirectory";
+            this.CheckBoxFileDirectory.Size = new System.Drawing.Size(142, 21);
+            this.CheckBoxFileDirectory.TabIndex = 11;
+            this.CheckBoxFileDirectory.Text = "Create file directory";
+            this.CheckBoxFileDirectory.UseVisualStyleBackColor = true;
+            // 
             // FormCheckSetup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 461);
+            this.Controls.Add(this.CheckBoxFileDirectory);
             this.Controls.Add(this.CheckBoxSQLDatabase);
             this.Controls.Add(this.ButtonRunSetup);
             this.Controls.Add(this.ButtonCancel);
@@ -171,5 +184,6 @@
         private Button ButtonCancel;
         private Button ButtonRunSetup;
         private CheckBox CheckBoxSQLDatabase;
+        private CheckBox CheckBoxFileDirectory;
     }
 }

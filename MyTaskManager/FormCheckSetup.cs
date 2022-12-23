@@ -24,6 +24,7 @@ namespace MyTaskManager
 
         private void CheckSoftwareRequirements()
         {
+
             try
             {
                 if (File.Exists(@"C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe") == true)
@@ -47,6 +48,17 @@ namespace MyTaskManager
                 {
                     FailedTests();
                     return;
+                }
+
+                string filePath = @"C:\MyTaskManager\OpenedFiles\";
+
+                if (Directory.Exists(filePath) == true)
+                {
+                    CheckBoxFileDirectory.Checked = true;
+                }
+                else
+                {
+                    CheckBoxFileDirectory.Checked = false;
                 }
 
                 //Projects, Statuses, Activity
@@ -88,7 +100,7 @@ namespace MyTaskManager
                 }
 
 
-                if (CheckBoxSQLStudio.Checked == true && CheckBoxSQLDatabase.Checked == true && CheckBoxSQLTables.Checked == true)
+                if (CheckBoxSQLStudio.Checked == true && CheckBoxSQLDatabase.Checked == true && CheckBoxSQLTables.Checked == true && CheckBoxFileDirectory.Checked == true)
                 {
                     PassedTests();
                 }
@@ -150,6 +162,12 @@ namespace MyTaskManager
                     }
 
 
+                }
+
+                if (CheckBoxFileDirectory.Checked == false)
+                {
+                    string filePath = @"C:\MyTaskManager\OpenedFiles\";
+                    Directory.CreateDirectory(filePath);
                 }
 
 
@@ -262,7 +280,7 @@ namespace MyTaskManager
 
         private void FormCheckSetup_Shown(object sender, EventArgs e)
         {
-            if (CheckBoxSQLStudio.Checked == true && CheckBoxSQLDatabase.Checked == true && CheckBoxSQLTables.Checked == true)
+            if (CheckBoxSQLStudio.Checked == true && CheckBoxSQLDatabase.Checked == true && CheckBoxSQLTables.Checked == true && CheckBoxFileDirectory.Checked == true)
             {
                 ButtonNext_Click(null, null);
             }
