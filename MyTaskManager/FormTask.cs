@@ -149,7 +149,7 @@ namespace MyTaskManager
                     {
                         GlobalCode.ShowMSGBox("Data has been saved successfully.");
                         newTask = false;
-                        selectedTask = task;
+                        selectedTask = Task.GetObjectByID(task.ID.ToString());
                         PopulateTaskInfo();
                         ButtonNewActivity.Enabled = true;
                         ButtonNewAttachment.Enabled = true;
@@ -182,8 +182,7 @@ namespace MyTaskManager
                     if (selectedTask.UpdateRecord() == true)
                     {
                         GlobalCode.ShowMSGBox("Data has been saved successfully.");
-                        newTask = false;
-                        PopulateTaskInfo();
+                        this.Close();
                     }
                     else
                     {

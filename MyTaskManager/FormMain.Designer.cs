@@ -37,8 +37,8 @@
             // 
             // ButtonNewProject
             // 
-            this.ButtonNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonNewProject.Location = new System.Drawing.Point(843, 12);
+            this.ButtonNewProject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNewProject.Location = new System.Drawing.Point(1043, 12);
             this.ButtonNewProject.Name = "ButtonNewProject";
             this.ButtonNewProject.Size = new System.Drawing.Size(129, 32);
             this.ButtonNewProject.TabIndex = 5;
@@ -48,8 +48,8 @@
             // 
             // ButtonManageStatuses
             // 
-            this.ButtonManageStatuses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonManageStatuses.Location = new System.Drawing.Point(573, 12);
+            this.ButtonManageStatuses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonManageStatuses.Location = new System.Drawing.Point(773, 12);
             this.ButtonManageStatuses.Name = "ButtonManageStatuses";
             this.ButtonManageStatuses.Size = new System.Drawing.Size(129, 32);
             this.ButtonManageStatuses.TabIndex = 6;
@@ -65,7 +65,7 @@
             this.FlowLayoutPanelLists.AutoScroll = true;
             this.FlowLayoutPanelLists.Location = new System.Drawing.Point(12, 50);
             this.FlowLayoutPanelLists.Name = "FlowLayoutPanelLists";
-            this.FlowLayoutPanelLists.Size = new System.Drawing.Size(960, 399);
+            this.FlowLayoutPanelLists.Size = new System.Drawing.Size(1160, 699);
             this.FlowLayoutPanelLists.TabIndex = 9;
             this.FlowLayoutPanelLists.WrapContents = false;
             // 
@@ -84,8 +84,8 @@
             // 
             // ButtonExportData
             // 
-            this.ButtonExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonExportData.Location = new System.Drawing.Point(708, 12);
+            this.ButtonExportData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonExportData.Location = new System.Drawing.Point(908, 12);
             this.ButtonExportData.Name = "ButtonExportData";
             this.ButtonExportData.Size = new System.Drawing.Size(129, 32);
             this.ButtonExportData.TabIndex = 11;
@@ -97,21 +97,22 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 461);
+            this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.ButtonExportData);
             this.Controls.Add(this.CheckBoxEnabled);
             this.Controls.Add(this.FlowLayoutPanelLists);
             this.Controls.Add(this.ButtonManageStatuses);
             this.Controls.Add(this.ButtonNewProject);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1000, 500);
-            this.MinimumSize = new System.Drawing.Size(1000, 500);
+            this.MinimumSize = new System.Drawing.Size(1200, 800);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
+            this.ResizeEnd += new System.EventHandler(this.FormMain_ResizeEnd);
+            this.Resize += new System.EventHandler(this.FormMain_Resize);
             this.ResumeLayout(false);
             this.PerformLayout();
 

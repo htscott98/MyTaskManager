@@ -37,7 +37,7 @@ namespace MyTaskManager
                     layoutPanel.Padding = new Padding(0);
                     layoutPanel.BackColor = Color.Transparent;
                     int height = FlowLayoutPanelLists.Height;
-                    layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 3, height);
+                    layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 4, height);
                     layoutPanel.BorderStyle = BorderStyle.FixedSingle;
                     layoutPanel.HorizontalScroll.Visible = false;
                     layoutPanel.HorizontalScroll.Enabled = false;
@@ -97,11 +97,12 @@ namespace MyTaskManager
                         newAttachmentButton.FlatAppearance.BorderSize = 0;
                         newAttachmentButton.FlatStyle = FlatStyle.Flat;
                         height = 30;
-                        newAttachmentButton.Size = new Size((taskLayout.Width / 3), height);
+                        newAttachmentButton.Size = new Size((taskLayout.Width / 3 - 1), height);
                         newAttachmentButton.Margin = new Padding(0);
                         newAttachmentButton.Padding = new Padding(0);
                         newAttachmentButton.ForeColor = Color.Red;
                         newAttachmentButton.Name = task.ID.ToString();
+                        newAttachmentButton.AutoSize = true;
                         newAttachmentButton.Click += AddAttachment;
 
                         taskLayout.Controls.Add(newAttachmentButton);
@@ -117,6 +118,7 @@ namespace MyTaskManager
                         newActivityButton.Padding = new Padding(0);
                         newActivityButton.ForeColor = Color.Blue;
                         newActivityButton.Name = task.ID.ToString();
+                        newActivityButton.AutoSize = true;
                         newActivityButton.Click += AddActivity;
 
                         taskLayout.Controls.Add(newActivityButton);
@@ -131,19 +133,22 @@ namespace MyTaskManager
                         editTaskButton.Padding = new Padding(0);
                         editTaskButton.ForeColor = Color.Green;
                         editTaskButton.Name = task.ID.ToString();
+                        editTaskButton.AutoSize = true;
                         editTaskButton.Click += EditTask;
 
                         taskLayout.Controls.Add(editTaskButton);
                         taskLayout.SetFlowBreak(editTaskButton, true);
 
+
                         Label layoutUpdated = new Label();
                         layoutUpdated.Text = "Last Updated: " + task.LastUpdated.ToString();
                         layoutUpdated.Width = Convert.ToInt32(layoutPanel.Width);
                         layoutUpdated.Font = new Font("Arial", 9, FontStyle.Bold);
-                        layoutUpdated.Margin = new Padding(0, 0, 0, 0);
+                        layoutUpdated.Margin = new Padding(0, 5, 0, 0);
                         layoutUpdated.Padding = new Padding(0);
-                        layoutUpdated.BackColor = Color.LightGray;
+                        //layoutUpdated.BackColor = Color.LightGray;
                         layoutUpdated.TextAlign = ContentAlignment.MiddleLeft;
+                        layoutUpdated.AutoSize = true;
 
                         taskLayout.Controls.Add(layoutUpdated);
 
@@ -166,7 +171,7 @@ namespace MyTaskManager
                         layoutPanel.BackColor = Color.Transparent;
                         int height = FlowLayoutPanelLists.Height;
                         layoutPanel.Name = status.ID.ToString();
-                        layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 3, height);
+                        layoutPanel.Size = new Size(FlowLayoutPanelLists.Width / 4, height);
                         layoutPanel.BorderStyle = BorderStyle.FixedSingle;
                         layoutPanel.HorizontalScroll.Visible = false;
                         layoutPanel.HorizontalScroll.Enabled = false;
@@ -232,11 +237,12 @@ namespace MyTaskManager
                             newAttachmentButton.FlatAppearance.BorderSize = 0;
                             newAttachmentButton.FlatStyle = FlatStyle.Flat;
                             height = 30;
-                            newAttachmentButton.Size = new Size((taskLayout.Width / 3), height);
+                            newAttachmentButton.Size = new Size((taskLayout.Width / 3 - 1), height);
                             newAttachmentButton.Margin = new Padding(0);
                             newAttachmentButton.Padding = new Padding(0);
                             newAttachmentButton.ForeColor = Color.Red;
                             newAttachmentButton.Name = task.ID.ToString();
+                            newAttachmentButton.AutoSize = true;
                             newAttachmentButton.Click += AddAttachment;
 
                             taskLayout.Controls.Add(newAttachmentButton);
@@ -252,6 +258,7 @@ namespace MyTaskManager
                             newActivityButton.Padding = new Padding(0);
                             newActivityButton.ForeColor = Color.Blue;
                             newActivityButton.Name = task.ID.ToString();
+                            newActivityButton.AutoSize = true;
                             newActivityButton.Click += AddActivity;
 
                             taskLayout.Controls.Add(newActivityButton);
@@ -266,6 +273,7 @@ namespace MyTaskManager
                             editTaskButton.Padding = new Padding(0);
                             editTaskButton.ForeColor = Color.Green;
                             editTaskButton.Name = task.ID.ToString();
+                            editTaskButton.AutoSize = true;
                             editTaskButton.Click += EditTask;
 
                             taskLayout.Controls.Add(editTaskButton);
@@ -276,10 +284,11 @@ namespace MyTaskManager
                             layoutUpdated.Text = "Last Updated: " + task.LastUpdated.ToString();
                             layoutUpdated.Width = Convert.ToInt32(layoutPanel.Width);
                             layoutUpdated.Font = new Font("Arial", 9, FontStyle.Bold);
-                            layoutUpdated.Margin = new Padding(0, 0, 0, 0);
+                            layoutUpdated.Margin = new Padding(0, 5, 0, 0);
                             layoutUpdated.Padding = new Padding(0);
-                            layoutUpdated.BackColor = Color.LightGray;
+                            //layoutUpdated.BackColor = Color.LightGray;
                             layoutUpdated.TextAlign = ContentAlignment.MiddleLeft;
+                            layoutUpdated.AutoSize = true;
 
                             taskLayout.Controls.Add(layoutUpdated);
 
@@ -629,6 +638,19 @@ namespace MyTaskManager
                 excel.Quit();
                 GlobalCode.ExceptionMessageBox();
             }
+        }
+
+        private void FormMain_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Maximized || WindowState == FormWindowState.Normal)
+            {
+                FormMain_Load(null, null);
+            }
+        }
+
+        private void FormMain_ResizeEnd(object sender, EventArgs e)
+        {
+            FormMain_Load(null, null);
         }
     }
 }
