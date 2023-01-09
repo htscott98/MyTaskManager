@@ -74,11 +74,11 @@
             // 
             this.CheckBoxSQLStudio.AutoCheck = false;
             this.CheckBoxSQLStudio.AutoSize = true;
-            this.CheckBoxSQLStudio.Location = new System.Drawing.Point(36, 223);
+            this.CheckBoxSQLStudio.Location = new System.Drawing.Point(173, 223);
             this.CheckBoxSQLStudio.Name = "CheckBoxSQLStudio";
-            this.CheckBoxSQLStudio.Size = new System.Drawing.Size(412, 21);
+            this.CheckBoxSQLStudio.Size = new System.Drawing.Size(139, 21);
             this.CheckBoxSQLStudio.TabIndex = 4;
-            this.CheckBoxSQLStudio.Text = "Install Microsoft SQL Server Management Studio (default location)";
+            this.CheckBoxSQLStudio.Text = "Install a SQL Server";
             this.CheckBoxSQLStudio.UseVisualStyleBackColor = true;
             // 
             // label3

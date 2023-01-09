@@ -1,3 +1,4 @@
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Diagnostics;
 
@@ -27,12 +28,23 @@ namespace MyTaskManager
 
             try
             {
-                if (File.Exists(@"C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe") == true)
+
+                using (SqlConnection connection = Connection.InitServerConnection())
                 {
-                    CheckBoxSQLStudio.Checked = true;
+                    try
+                    {
+                        connection.Open();
+                        CheckBoxSQLStudio.Checked = true;
+                        connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        CheckBoxSQLStudio.Checked = false;
+                        return;
+                    }
                 }
 
-                string sql = "select * from sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb')";
+                    string sql = "select * from sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb')";
                 DataTable dt = Execute.ExecuteSelectReturnDT(Connection.InitServerConnection(), sql);
 
                 foreach (DataRow row in dt.Rows)
@@ -126,9 +138,9 @@ namespace MyTaskManager
 
                 if (CheckBoxSQLStudio.Checked == false)
                 {
-                    if(GlobalCode.ShowMSGBox("Please install Microsoft SQL Server Management Studio to its default location." + Environment.NewLine + Environment.NewLine + "Would you like to go there now?", MessageBoxIcon.Information, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if(GlobalCode.ShowMSGBox("Please install a SQL Server with default properties." + Environment.NewLine + Environment.NewLine + "Would you like to go there now?", MessageBoxIcon.Information, MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        Process.Start(new ProcessStartInfo("https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16") { UseShellExecute = true });
+                        Process.Start(new ProcessStartInfo("https://www.microsoft.com/en-us/sql-server/sql-server-downloads") { UseShellExecute = true });
                         return;
                     }
                     else
